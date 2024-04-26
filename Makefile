@@ -14,5 +14,5 @@ clean:
 	rm -f $(TARGET).out
 pack:
 	rm -f $(TARGET).zip
-	tar -cvf $(TARGET).zip *.c Makefile
+	zip -r $(TARGET).zip *.c Makefile
 .PHONY: clean pack all
