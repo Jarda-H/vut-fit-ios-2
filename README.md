@@ -16,6 +16,7 @@ Projekt zaměřený na procesy, sdílenou pamět, semafory a deadlocky (hlavně 
 **tests.sh** - pouze test, jestli output soubor odpovídá zadání
 > **tests.sh** může při velkém output souboru trvat dlouho
 
+> Nejde spustit script? Nastavte dobře oprávnění: `chmod +x [script]`
 # Hodnocení
 ```
 TBD
