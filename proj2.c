@@ -10,6 +10,7 @@
 #define OK_CODE 0
 #define ERR_CODE 1
 #define POCET_ARG 5
+#define OUTPUT_FILE "proj2.out"
 
 #define MAX_SKIERS 20000
 #define MAX_BUS_STOPS 10
@@ -53,7 +54,7 @@ int init_resources(int Z)
         return ERR_CODE;
     }
 
-    sem_init(&data->bus, 1, 0);
+    sem_init(&data->bus, 1, 0); // post first
     for (int i = 0; i < Z; i++)
     {
         sem_init(&data->stop_sem[i], 1, 0); // post first
@@ -61,7 +62,7 @@ int init_resources(int Z)
     sem_init(&data->action_mutex, 1, 1);
     sem_init(&data->bus_finished, 1, 0);  // post first
     sem_init(&data->bus_can_leave, 1, 0); // post first
-    data->log_file = fopen("proj2.out", "w");
+    data->log_file = fopen(OUTPUT_FILE, "w");
     if (data->log_file == NULL)
     {
         fprintf(stderr, "Error opening log file for write\n");

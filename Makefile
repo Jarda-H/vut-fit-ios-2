@@ -8,11 +8,11 @@ all: $(TARGET)
 
 $(TARGET): $(SRCS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS)
-
-run:
-	./$(TARGET) 1000 5 50 696 210
 clean:
 	rm -f $(TARGET)
+	rm -f $(TARGET).zip
+	rm -f $(TARGET).out
 pack:
+	rm -f $(TARGET).zip
 	tar -cvf $(TARGET).zip *.c Makefile
-.PHONY: clean run all
+.PHONY: clean pack all
