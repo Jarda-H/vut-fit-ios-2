@@ -73,6 +73,7 @@ int init_resources(int Z)
 }
 void sem_destroy_all()
 {
+    // rip bozo 🚦s ya wouldn't be missed
     sem_destroy(&data->bus);
     for (int i = 0; i < data->stop_count; i++)
     {
@@ -170,7 +171,7 @@ void bus(int Z, int K, int TB, int L)
         int stop_no = i + 1;
         // slow aaaaah bus
         usleep(get_random_from_range(0, TB));
-
+        // 🚌 🔥
         log_action("BUS: arrived to %d", stop_no);
 
         sem_wait(&data->action_mutex);
@@ -178,19 +179,19 @@ void bus(int Z, int K, int TB, int L)
         sem_post(&data->action_mutex);
 
         int ppl_to_board = (on_stop > K) ? K : on_stop;
-        // lets not overfill the bus
+        // lets not overfill the bus 💀
         if (data->in_bus + ppl_to_board > K)
         {
             ppl_to_board = K - data->in_bus;
         }
-        // let em board
+        // BUS DRIVER: 🗣️ get in
         for (int bro = 0; bro < ppl_to_board; bro++)
         {
             sem_post(&data->stop_sem[i]); // tell bro to board
-
-            sem_wait(&data->bus); // wait till broski boards
+            // BUS DRIVER is the 🐐, he waits for all till they board
+            sem_wait(&data->bus); // wait
         }
-
+        // BUS: bye bye 🤫🧏‍♂️
         log_action("BUS: leaving %d", stop_no);
         // another stop or nah?
         if (stop_no < Z)
@@ -198,9 +199,8 @@ void bus(int Z, int K, int TB, int L)
         // slow bus frfr
         usleep(get_random_from_range(0, TB));
         log_action("BUS: arrived to final");
-        // tell em to f off
+        // BUS DRIVER: 🗣️ f off 😡💢
         int ppl_to_leave = data->in_bus;
-
         for (int xd = 0; xd < ppl_to_leave; xd++)
         {
             sem_post(&data->bus_finished);
@@ -210,7 +210,7 @@ void bus(int Z, int K, int TB, int L)
 
         if (data->skiing != L)
         {
-            // ah shii, here we go again
+            // ah 💩, here we go again
             i = -1;
             continue;
         }
@@ -222,6 +222,7 @@ void bus(int Z, int K, int TB, int L)
 
 int main(int argc, char *argv[])
 {
+    // ඞ sussy baka
     if (argc != POCET_ARG + 1) // +1 name
     {
         fprintf(stderr, "Error: Invalid arguments\n");
@@ -249,7 +250,7 @@ int main(int argc, char *argv[])
     if (init_resources(Z) != OK_CODE)
         return ERR_CODE;
 
-    pid_t pid = fork(); // bus
+    pid_t pid = fork(); // skibidibus
     if (pid < 0)
     {
         fprintf(stderr, "Error: skibus fork failed\n");
@@ -281,6 +282,8 @@ int main(int argc, char *argv[])
     {
         wait(NULL);
     }
+    // 💀 kill all sems, shared mem etc.
     free_all();
     return OK_CODE;
 }
+// skibidi 🚽
